@@ -9,9 +9,6 @@ let quotes = [
 const quoteDisplay = document.getElementById("quoteDisplay");
 const categorySelect = document.getElementById("categorySelect");
 const newQuoteBtn = document.getElementById("newQuote");
-const addQuoteBtn = document.getElementById("addQuoteBtn");
-const newQuoteText = document.getElementById("newQuoteText");
-const newQuoteCategory = document.getElementById("newQuoteCategory");
 
 // Populate category dropdown
 function updateCategorySelect() {
@@ -37,26 +34,53 @@ function showRandomQuote() {
   }
 }
 
-// Add a new quote
-function addQuote() {
-  const text = newQuoteText.value.trim();
-  const category = newQuoteCategory.value.trim();
+// Dynamically create Add Quote form
+function createAddQuoteForm() {
+  const formSection = document.createElement("div");
+  formSection.classList.add("form-section");
 
-  if (text && category) {
-    quotes.push({ text, category });
-    updateCategorySelect();
-    newQuoteText.value = "";
-    newQuoteCategory.value = "";
-    alert("Quote added successfully!");
-  } else {
-    alert("Please enter both a quote and a category.");
-  }
+  const heading = document.createElement("h3");
+  heading.textContent = "Add a New Quote";
+
+  const quoteInput = document.createElement("input");
+  quoteInput.id = "newQuoteText";
+  quoteInput.type = "text";
+  quoteInput.placeholder = "Enter a new quote";
+
+  const categoryInput = document.createElement("input");
+  categoryInput.id = "newQuoteCategory";
+  categoryInput.type = "text";
+  categoryInput.placeholder = "Enter quote category";
+
+  const addButton = document.createElement("button");
+  addButton.textContent = "Add Quote";
+  addButton.addEventListener("click", () => {
+    const text = quoteInput.value.trim();
+    const category = categoryInput.value.trim();
+    if (text && category) {
+      quotes.push({ text, category });
+      updateCategorySelect();
+      quoteInput.value = "";
+      categoryInput.value = "";
+      alert("Quote added successfully!");
+    } else {
+      alert("Please enter both a quote and a category.");
+    }
+  });
+
+  formSection.appendChild(heading);
+  formSection.appendChild(quoteInput);
+  formSection.appendChild(categoryInput);
+  formSection.appendChild(addButton);
+
+  document.body.appendChild(formSection);
 }
 
 // Event listeners
 newQuoteBtn.addEventListener("click", showRandomQuote);
-addQuoteBtn.addEventListener("click", addQuote);
 
 // Initialize
 updateCategorySelect();
 showRandomQuote();
+createAddQuoteForm();
+
