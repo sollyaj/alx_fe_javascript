@@ -1,25 +1,42 @@
   <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Quote Generator</title>
-  </head>
-  <body>
-    <h1>Dynamic Quote Generator</h1>
-      <!-- Category Selector -->
-  <label for="categorySelect">Select Category:</label>
-  <select id="categorySelect"></select>
-  <button id="newQuote">Show New Quote</button>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dynamic Quote Generator</title>
+  <style>
+    body { font-family: system-ui, Arial, sans-serif; padding: 20px; max-width: 720px; margin: 0 auto; }
+    h1 { margin-bottom: 12px; }
+    #quoteDisplay { margin: 16px 0 8px; font-size: 1.25rem; line-height: 1.5; }
+    #quoteMeta { color: #555; font-size: 0.95rem; }
+    select, input, button { padding: 8px 10px; margin: 6px 0; }
+    .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .form-section { margin-top: 22px; border-top: 1px solid #e5e5e5; padding-top: 14px; }
+    .controls { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  </style>
+</head>
+<body>
+  <h1>Dynamic Quote Generator</h1>
 
-    <div id="quoteDisplay"></div>
-    
-      <div class="form-section">
-    <h3>Add a New Quote</h3>
-    <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
-    <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
-    <button id="addQuoteBtn">Add Quote</button>
+  <div class="row">
+    <label for="categorySelect">Select Category:</label>
+    <select id="categorySelect"></select>
+    <button id="newQuote">Show New Quote</button>
   </div>
-    <script src="script.js"></script>
-  </body>
-  </html>
+
+  <div id="quoteDisplay"></div>
+  <div id="quoteMeta"></div>
+
+  <!-- Import/Export controls -->
+  <div class="form-section">
+    <h3>Import / Export Quotes (JSON)</h3>
+    <div class="controls">
+      <button id="exportBtn">Export JSON</button>
+      <input type="file" id="importFile" accept=".json"/>
+    </div>
+    <small>Tip: export creates a <code>quotes.json</code> download. Import expects an array of <code>{ text, category }</code> objects.</small>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
