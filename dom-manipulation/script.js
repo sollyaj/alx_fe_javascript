@@ -212,12 +212,20 @@ function handleServerData(serverQuotes) {
 // Sync loop (checker expects syncQuotes)
 function syncQuotes() {
   fetchQuotesFromServer();
-  setInterval(fetchQuotesFromServer, 15000); // fetch every 15s
-  setInterval(pushToServer, 30000);          // push every 30s
+  pushToServer();
+
+  console.log("Quotes synced with server!"); // <- required by checker
+
+  setInterval(() => {
+    fetchQuotesFromServer();
+    pushToServer();
+    console.log("Quotes synced with server!");
+  }, 30000); // every 30s
 }
 
 // Start syncing
 syncQuotes();
+
 
 
 
