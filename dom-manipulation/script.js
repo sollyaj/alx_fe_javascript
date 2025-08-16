@@ -209,14 +209,16 @@ function handleServerData(serverQuotes) {
   }
 }
 
-// Start sync loop
-function startSync() {
-  fetchFromServer();
-  setInterval(fetchFromServer, 15000); // every 15s
-  setInterval(pushToServer, 30000);   // every 30s
+// Sync loop (checker expects syncQuotes)
+function syncQuotes() {
+  fetchQuotesFromServer();
+  setInterval(fetchQuotesFromServer, 15000); // fetch every 15s
+  setInterval(pushToServer, 30000);          // push every 30s
 }
 
-startSync();
+// Start syncing
+syncQuotes();
+
 
 
 
